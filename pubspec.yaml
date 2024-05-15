@@ -15,7 +15,8 @@ dependencies:
   cloud_firestore: ^4.15.8
   fluttertoast: ^8.2.5
   provider: ^6.1.2
-  font_awesome_flutter: ^10.7.0
+  animated_custom_dropdown: ^3.0.0
+
 
   flutter:
     sdk: flutter
@@ -32,3 +33,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/

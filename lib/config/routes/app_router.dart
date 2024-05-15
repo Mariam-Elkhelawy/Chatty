@@ -3,6 +3,7 @@ import 'package:chatty/core/components/reusable_components.dart';
 import 'package:chatty/features/auth_screen.dart';
 import 'package:chatty/features/home/home_screen.dart';
 import 'package:chatty/features/login/login_screen.dart';
+import 'package:chatty/features/room/add_room_screen.dart';
 import 'package:chatty/features/signup/signup_screen.dart';
 import 'package:chatty/features/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,9 @@ class AppRoutes {
       case AppRoutesName.home:
         return MaterialPageRoute(
             builder: (context) => const HomeScreen(), settings: settings);
+        case AppRoutesName.addRoom:
+        return MaterialPageRoute(
+            builder: (context) => const AddRoomScreen(), settings: settings);
       default:
         return MaterialPageRoute(
             builder: (context) => unDefinedRoute(), settings: settings);

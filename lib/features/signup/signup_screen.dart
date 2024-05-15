@@ -46,7 +46,7 @@ class _SignUpScreenState extends BaseView<SignUpScreen, SignUpViewModel>
                 style: AppStyles.bodyL,
               ),
               SizedBox(height: 4.h),
-              Text(AppStrings.createNew, style: AppStyles.bodyS),
+              Text(AppStrings.createNewAccount, style: AppStyles.bodyS),
               SizedBox(height: 50.h),
               Container(
                 width: double.infinity,

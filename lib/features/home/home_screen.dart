@@ -5,7 +5,6 @@ import 'package:chatty/features/base.dart';
 import 'package:chatty/features/home/home_navigator.dart';
 import 'package:chatty/features/home/home_vm.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,8 +30,10 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             backgroundColor: AppColor.primaryColor,
-            onPressed: () {},
-            child: const FaIcon(
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutesName.addRoom);
+            },
+            child: const Icon(
               Icons.group_add_rounded,
               color: AppColor.whiteColor,
             ),
