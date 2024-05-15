@@ -12,10 +12,10 @@ dependencies:
   google_fonts: 6.1.0
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.8
-  flutter_bloc: ^8.1.5
-  bloc: ^8.1.4
+  cloud_firestore: ^4.15.8
   fluttertoast: ^8.2.5
   provider: ^6.1.2
+  font_awesome_flutter: ^10.7.0
 
   flutter:
     sdk: flutter

@@ -133,7 +133,8 @@ class _SignUpScreenState extends BaseView<SignUpScreen, SignUpViewModel>
                           ),
                           SizedBox(height: 6.h),
                           customTextFormField(
-                              controller: phoneController,keyboardType: TextInputType.phone,
+                              controller: phoneController,
+                              keyboardType: TextInputType.phone,
                               borderColor:
                                   AppColor.primaryColor.withOpacity(.05),
                               hintText: AppStrings.mobileHint,
@@ -186,6 +187,8 @@ class _SignUpScreenState extends BaseView<SignUpScreen, SignUpViewModel>
                               if (formKey.currentState!.validate()) {
                                 viewModel.createAccount(
                                     email: emailController.text,
+                                    name: nameController.text,
+                                    phone: phoneController.text,
                                     password: passwordController.text);
                               }
                             },
@@ -245,5 +248,11 @@ class _SignUpScreenState extends BaseView<SignUpScreen, SignUpViewModel>
   @override
   SignUpViewModel initViewModel() {
     return SignUpViewModel();
+  }
+
+  @override
+  goToHome() {
+    Navigator.pushNamed(context, AppRoutesName.home);
+
   }
 }

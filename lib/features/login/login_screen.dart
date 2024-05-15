@@ -6,6 +6,7 @@ import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
 import 'package:chatty/features/login/login_navigator.dart';
 import 'package:chatty/features/login/login_vm.dart';
+import 'package:chatty/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -208,5 +209,10 @@ class _LogInScreenState extends BaseView<LogInScreen, LoginViewModel>
   @override
   LoginViewModel initViewModel() {
     return LoginViewModel();
+  }
+
+  @override
+  void goToHome(UserModel userModel) {
+    Navigator.pushNamed(context, AppRoutesName.home);
   }
 }

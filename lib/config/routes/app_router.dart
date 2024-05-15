@@ -1,6 +1,7 @@
 import 'package:chatty/config/routes/app_routes_names.dart';
 import 'package:chatty/core/components/reusable_components.dart';
 import 'package:chatty/features/auth_screen.dart';
+import 'package:chatty/features/home/home_screen.dart';
 import 'package:chatty/features/login/login_screen.dart';
 import 'package:chatty/features/signup/signup_screen.dart';
 import 'package:chatty/features/splash_screen.dart';
@@ -21,6 +22,9 @@ class AppRoutes {
       case AppRoutesName.signup:
         return MaterialPageRoute(
             builder: (context) => const SignUpScreen(), settings: settings);
+      case AppRoutesName.home:
+        return MaterialPageRoute(
+            builder: (context) => const HomeScreen(), settings: settings);
       default:
         return MaterialPageRoute(
             builder: (context) => unDefinedRoute(), settings: settings);
