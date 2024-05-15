@@ -28,6 +28,8 @@ class AppStrings {
       "Enter valid password..\nPassword should be more than 8 characters long \nIt should contain :\nat least one Uppercase ( Capital ) letter \nat least one lowercase character \nat least one number and \nspecial character EX:  ! @ # \$ & * ~";
   static const String passwordValidate = "Password can't be empty!";
   static const String nameValidate = "Name can't be empty!";
+  static const String phoneValidate = "Phone can't be empty!";
+  static const String phoneValidate2 = "Enter Valid Number e.g: +02010XXXXXXXX";
   static const String chattyIntro =
       'Our chatty app is the perfect way to stay connected with friends and family.';
 }

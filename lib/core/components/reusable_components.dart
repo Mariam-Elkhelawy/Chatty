@@ -1,5 +1,6 @@
 import 'package:chatty/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget unDefinedRoute() {
   return const Scaffold(
@@ -19,9 +20,11 @@ Widget customTextFormField(
     double radius = 0,
     bool isPassword = false,
     TextStyle? textStyle,
+    TextInputType? keyboardType,
     EdgeInsetsGeometry? contentPadding,
     String? Function(String?)? onValidate}) {
   return TextFormField(
+    keyboardType: keyboardType,
     validator: onValidate,
     style: textStyle,
     obscureText: isPassword,
@@ -79,13 +82,13 @@ Container customButton(
   );
 }
 
-// customToast({required String message}) {
-//   return Fluttertoast.showToast(
-//       msg: message,
-//       toastLength: Toast.LENGTH_SHORT,
-//       gravity: ToastGravity.BOTTOM,
-//       backgroundColor: AppColor.primaryColor,
-//       timeInSecForIosWeb: 3,
-//       textColor: Colors.white,
-//       fontSize: 13.0);
-// }
+customToast({required String message}) {
+  return Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: AppColor.primaryColor,
+      timeInSecForIosWeb: 3,
+      textColor: Colors.white,
+      fontSize: 13.0);
+}
