@@ -1,87 +1,78 @@
+import 'package:chatty/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
 
 class RoomCategoryModel {
   String id;
   String roomName;
-  String roomImage;
   Widget roomIcon;
 
   RoomCategoryModel(
       {required this.id,
       required this.roomName,
-      required this.roomImage,
       required this.roomIcon});
   static List<RoomCategoryModel> getCategories() {
     return [
       RoomCategoryModel(
-        id: 'Friends',
+        id: 'friends',
         roomName: 'Friends',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_friends.png'),
+          AssetImage(AppImages.icFriends),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'Sport',
+        id: 'sport',
         roomName: 'Sport Club',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_sport.png'),
+          AssetImage(AppImages.icSport),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'Family',
+        id: 'family',
         roomName: 'Family',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_family.png'),
+          AssetImage(AppImages.icFamily),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'Movie',
+        id: 'movie',
         roomName: 'Movies',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_movie.png'),
+          AssetImage(AppImages.icMovie),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'Health',
-        roomName: 'Healths',
-        roomImage: 'roomImage',
+        id: 'health',
+        roomName: 'Health',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_health.png'),
+          AssetImage(AppImages.icHealth),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'id',
+        id: 'work',
         roomName: 'Work',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_work.png'),
+          AssetImage(AppImages.icWork),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'id',
+        id: 'music',
         roomName: 'Music',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_music.png'),
+          AssetImage(AppImages.icMusic),
           size: 18,
         ),
       ),
       RoomCategoryModel(
-        id: 'id',
+        id: 'love',
         roomName: 'Love',
-        roomImage: 'roomImage',
         roomIcon: const ImageIcon(
-          AssetImage('assets/icons/ic_love.png'),
+          AssetImage(AppImages.icLove),
           size: 18,
         ),
       ),

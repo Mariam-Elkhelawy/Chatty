@@ -1,4 +1,3 @@
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:chatty/core/utils/app_colors.dart';
 import 'package:chatty/models/room_category_model.dart';
 import 'package:flutter/material.dart';
@@ -8,48 +7,51 @@ class CustomDropDownWidget extends StatelessWidget {
   const CustomDropDownWidget(
       {super.key,
       required this.onChanged,
-      required this.hintText,
+      required this.value,
       required this.items,
-      required this.initialItem});
+});
   final List<RoomCategoryModel> items;
-  final String hintText;
-  final RoomCategoryModel initialItem;
-  final VoidCallback onChanged;
+  final RoomCategoryModel? value;
+  final Function(RoomCategoryModel?)? onChanged;
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown(
-      closedHeaderPadding:
-          EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
-      initialItem: initialItem,
-      hintText: hintText,
-      decoration: CustomDropdownDecoration(
-        closedSuffixIcon: const Icon(
-          Icons.keyboard_arrow_down,
-          color: AppColor.primaryColor,
-        ),
-        expandedSuffixIcon: const Icon(
-          Icons.keyboard_arrow_up,
-          color: AppColor.primaryColor,
-        ),
-        closedBorderRadius: BorderRadius.circular(10.r),
-        expandedBorderRadius: BorderRadius.circular(10.r),
-        expandedBorder: Border.all(color: AppColor.whiteColor),
-        closedBorder: Border.all(color: AppColor.primaryColor.withOpacity(.1)),
-        closedFillColor: AppColor.primaryColor.withOpacity(.1),
-        expandedFillColor: AppColor.whiteColor,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
+        color: AppColor.primaryColor.withOpacity(.1),
       ),
-      items: items
-          .map((e) => Row(
-                children: [
-                  e.roomIcon,
-                  SizedBox(width: 16.w,),
-                  Text(e.roomName)
-                ],
-              ))
-          .toList(),
-      onChanged: (p0) {
-        onChanged();
-      },
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<RoomCategoryModel>(
+          isExpanded: true,
+          iconEnabledColor: AppColor.primaryColor,
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 1.h),
+          iconDisabledColor: AppColor.primaryColor,
+          borderRadius: BorderRadius.circular(10.r),
+          dropdownColor: AppColor.whiteColor,
+          value: value,
+          icon: const Icon(
+            Icons.keyboard_arrow_down,
+          ),
+          items: items
+              .map(
+                (e) => DropdownMenuItem<RoomCategoryModel>(
+                  value: e,
+                  child: Row(
+                    children: [
+                      e.roomIcon,
+                      SizedBox(
+                        width: 16.w,
+                      ),
+                      Text(e.roomName)
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
+          onChanged:
+            onChanged
+        ),
+      ),
     );
   }
 }

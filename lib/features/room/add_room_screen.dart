@@ -1,3 +1,4 @@
+import 'package:chatty/config/routes/app_routes_names.dart';
 import 'package:chatty/core/components/reusable_components.dart';
 import 'package:chatty/core/utils/app_colors.dart';
 import 'package:chatty/core/utils/app_strings.dart';
@@ -5,6 +6,7 @@ import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
 import 'package:chatty/features/room/add_room_navigator.dart';
 import 'package:chatty/features/room/add_room_vm.dart';
+import 'package:chatty/features/room/widgets/custom_drop_down.dart';
 import 'package:chatty/models/room_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +35,6 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
 
   @override
   Widget build(BuildContext context) {
-    print(categories);
     return Scaffold(
       backgroundColor: AppColor.primaryColor,
       body: SingleChildScrollView(
@@ -107,49 +108,14 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
                                 AppStyles.generalText.copyWith(fontSize: 16.sp),
                           ),
                           SizedBox(height: 6.h),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              color: AppColor.primaryColor.withOpacity(.1),
-                            ),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<RoomCategoryModel>(
-                                isExpanded: true,
-                                iconEnabledColor: AppColor.primaryColor,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 1.h),
-                                iconDisabledColor: AppColor.primaryColor,
-                                borderRadius: BorderRadius.circular(10.r),
-                                dropdownColor: AppColor.whiteColor,
-                                value: roomCategoryModel,
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down,
-                                ),
-                                items: categories
-                                    .map(
-                                      (e) =>
-                                          DropdownMenuItem<RoomCategoryModel>(
-                                        value: e,
-                                        child: Row(
-                                          children: [
-                                            e.roomIcon,
-                                            SizedBox(
-                                              width: 16.w,
-                                            ),
-                                            Text(e.roomName)
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  if (value == null) return;
-                                  roomCategoryModel = value;
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                          ),
+                          CustomDropDownWidget(
+                              onChanged: (value) {
+                                if (value == null) return;
+                                roomCategoryModel = value;
+                                setState(() {});
+                              },
+                              value: roomCategoryModel,
+                              items: categories),
                           SizedBox(height: 20.h),
                           Text(
                             AppStrings.roomDescription,
@@ -160,7 +126,6 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
                           customTextFormField(
                             controller: descriptionController,
                             borderColor: AppColor.primaryColor.withOpacity(.05),
-                            isPassword: true,
                             hintText: AppStrings.descriptionHint,
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 18.w, vertical: 10.h),
@@ -177,7 +142,12 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
                           SizedBox(height: 50.h),
                           InkWell(
                             onTap: () async {
-                              if (formKey.currentState!.validate()) {}
+                              if (formKey.currentState!.validate()) {
+                                viewModel.createRoom(
+                                    roomName: nameController.text,
+                                    roomDescription: descriptionController.text,
+                                    catId: roomCategoryModel.id);
+                              }
                             },
                             child: customButton(
                               color: AppColor.primaryColor,
@@ -209,5 +179,11 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
   @override
   AddRoomViewModel initViewModel() {
     return AddRoomViewModel();
+  }
+
+  @override
+  void createRoom() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoutesName.home, (route) => false);
   }
 }
