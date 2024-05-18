@@ -12,7 +12,8 @@ Chatty is a real-time chat application that allows users to create and join chat
 ## ⚙️ Installation
 - **Prerequisites**:
 - 💻 Flutter installed on your local machine. Follow the instructions on the Flutter website to set it up.
-- 🔥 Firebase project set up. Follow the instructions on the Firebase website to set it up and add Firebase to your Flutter app
+- 🔥 Firebase project set up. Follow the instructions on the Firebase website to set it up and add Firebase to your Flutter app.
+  
 To get started with the Chatty app, follow these simple steps:
 1. Clone the repository:
    git clone https://github.com/Mariam-Elkhelawy/Chatty
