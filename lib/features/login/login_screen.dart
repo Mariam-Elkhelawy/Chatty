@@ -6,7 +6,8 @@ import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
 import 'package:chatty/features/login/login_navigator.dart';
 import 'package:chatty/features/login/login_vm.dart';
-import 'package:chatty/models/user_model.dart';
+import 'package:chatty/features/models/user_model.dart';
+import 'package:chatty/features/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +88,7 @@ class _LogInScreenState extends BaseView<LogInScreen, LoginViewModel>
                           SizedBox(height: 6.h),
                           customTextFormField(
                             controller: emailController,
+                            fillColor: AppColor.primaryColor.withOpacity(.1),
                             borderColor: AppColor.primaryColor.withOpacity(.05),
                             hintText: AppStrings.emailHint,
                             contentPadding: EdgeInsets.symmetric(
@@ -109,6 +111,7 @@ class _LogInScreenState extends BaseView<LogInScreen, LoginViewModel>
                           ),
                           SizedBox(height: 6.h),
                           customTextFormField(
+                            fillColor: AppColor.primaryColor.withOpacity(.1),
                             controller: passwordController,
                             borderColor: AppColor.primaryColor.withOpacity(.05),
                             isPassword: true,
@@ -213,6 +216,8 @@ class _LogInScreenState extends BaseView<LogInScreen, LoginViewModel>
 
   @override
   void goToHome(UserModel userModel) {
-    Navigator.pushNamed(context, AppRoutesName.home);
+    var provider = Provider.of<UserProvider>(context,listen: false);
+    provider.userModel=userModel;
+    Navigator.pushReplacementNamed(context, AppRoutesName.home);
   }
 }

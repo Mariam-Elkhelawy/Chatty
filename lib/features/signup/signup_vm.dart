@@ -1,8 +1,8 @@
 import 'package:chatty/core/database/database_utils.dart';
 import 'package:chatty/core/errors/firebase_errors.dart';
 import 'package:chatty/features/base.dart';
+import 'package:chatty/features/models/user_model.dart';
 import 'package:chatty/features/signup/signup_navigator.dart';
-import 'package:chatty/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpViewModel extends BaseViewModel<SignUpNavigator> {
@@ -26,7 +26,7 @@ class SignUpViewModel extends BaseViewModel<SignUpNavigator> {
           phone: phone);
      await DataBaseUtils.addUser(userModel);
      navigator!.hideDialog();
-      navigator!.goToHome();
+      navigator!.goToHome(userModel);
     } on FirebaseAuthException catch (e) {
       if (e.code == FireBaseErrors.weakPassword) {
         message = 'The password provided is too weak.';

@@ -5,6 +5,8 @@ import 'package:chatty/core/utils/app_strings.dart';
 import 'package:chatty/core/utils/constants.dart';
 import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
+import 'package:chatty/features/models/user_model.dart';
+import 'package:chatty/features/provider/user_provider.dart';
 import 'package:chatty/features/signup/signup_navigator.dart';
 import 'package:chatty/features/signup/signup_vm.dart';
 import 'package:flutter/material.dart';
@@ -48,191 +50,197 @@ class _SignUpScreenState extends BaseView<SignUpScreen, SignUpViewModel>
               SizedBox(height: 4.h),
               Text(AppStrings.createNewAccount, style: AppStyles.bodyS),
               SizedBox(height: 50.h),
-              Container(
-                width: double.infinity,
-                height: 688.5.h,
-                decoration: BoxDecoration(
-                  color: AppColor.whiteColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60.r),
-                    topRight: Radius.circular(60.r),
+              SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  height: 688.5.h,
+                  decoration: BoxDecoration(
+                    color: AppColor.whiteColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60.r),
+                      topRight: Radius.circular(60.r),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 32.w, vertical: 40.h),
-                  child: SingleChildScrollView(
-                    child: ChangeNotifierProvider(
-                      create: (context) => viewModel,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.signup,
-                            style: AppStyles.textButton.copyWith(
-                                color: AppColor.primaryColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 22),
-                          ),
-                          SizedBox(height: 20.h),
-                          Text(
-                            AppStrings.fullName,
-                            style:
-                                AppStyles.generalText.copyWith(fontSize: 16.sp),
-                          ),
-                          SizedBox(height: 6.h),
-                          customTextFormField(
-                            controller: nameController,
-                            borderColor: AppColor.primaryColor.withOpacity(.05),
-                            hintText: AppStrings.fullNameHint,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 18.w, vertical: 10.h),
-                            textStyle:
-                                AppStyles.generalText.copyWith(fontSize: 16.sp),
-                            radius: 10.r,
-                            onValidate: (value) {
-                              if (value!.trim().isEmpty) {
-                                return AppStrings.nameValidate;
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 20.h),
-                          Text(
-                            AppStrings.email,
-                            style:
-                                AppStyles.generalText.copyWith(fontSize: 16.sp),
-                          ),
-                          SizedBox(height: 6.h),
-                          customTextFormField(
-                              controller: emailController,
-                              borderColor:
-                                  AppColor.primaryColor.withOpacity(.05),
-                              hintText: AppStrings.emailHint,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 18.w, vertical: 10.h),
-                              textStyle: AppStyles.generalText
-                                  .copyWith(fontSize: 16.sp),
-                              radius: 10.r,
-                              onValidate: (value) {
-                                if (value!.trim().isEmpty) {
-                                  return AppStrings.emailValidate;
-                                }
-                                bool emailValid =
-                                    RegExp(Constants.emailReg).hasMatch(value);
-                                if (!emailValid) {
-                                  return AppStrings.emailValidate2;
-                                }
-                                return null;
-                              }),
-                          SizedBox(height: 20.h),
-                          Text(
-                            AppStrings.mobile,
-                            style:
-                                AppStyles.generalText.copyWith(fontSize: 16.sp),
-                          ),
-                          SizedBox(height: 6.h),
-                          customTextFormField(
-                              controller: phoneController,
-                              keyboardType: TextInputType.phone,
-                              borderColor:
-                                  AppColor.primaryColor.withOpacity(.05),
-                              hintText: AppStrings.mobileHint,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 18.w, vertical: 10.h),
-                              textStyle: AppStyles.generalText
-                                  .copyWith(fontSize: 16.sp),
-                              radius: 10.r,
-                              onValidate: (value) {
-                                if (value!.trim().isEmpty) {
-                                  return AppStrings.phoneValidate;
-                                }
-                                RegExp regex = RegExp(Constants.phoneReg);
-                                if (!regex.hasMatch(value)) {
-                                  return AppStrings.phoneValidate2;
-                                }
-                                return null;
-                              }),
-                          SizedBox(height: 20.h),
-                          Text(
-                            AppStrings.password,
-                            style:
-                                AppStyles.generalText.copyWith(fontSize: 16.sp),
-                          ),
-                          SizedBox(height: 6.h),
-                          customTextFormField(
-                            controller: passwordController,
-                            borderColor: AppColor.primaryColor.withOpacity(.05),
-                            isPassword: true,
-                            hintText: AppStrings.passwordHint,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 18.w, vertical: 10.h),
-                            textStyle:
-                                AppStyles.generalText.copyWith(fontSize: 16.sp),
-                            radius: 10.r,
-                            onValidate: (value) {
-                              if (value!.trim().isEmpty) {
-                                return AppStrings.passwordValidate;
-                              }
-                              RegExp regex = RegExp(Constants.passwordReg);
-                              if (!regex.hasMatch(value)) {
-                                return AppStrings.passwordValidate2;
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 50.h),
-                          InkWell(
-                            onTap: () async {
-                              if (formKey.currentState!.validate()) {
-                                viewModel.createAccount(
-                                    email: emailController.text,
-                                    name: nameController.text,
-                                    phone: phoneController.text,
-                                    password: passwordController.text);
-                              }
-                            },
-                            child: customButton(
-                              color: AppColor.primaryColor,
-                              borderColor: AppColor.primaryColor,
-                              height: 60.h,
-                              width: 360.w,
-                              borderRadius: BorderRadius.circular(15.r),
-                              child: Text(
-                                AppStrings.create,
-                                style: AppStyles.textButton
-                                    .copyWith(color: AppColor.whiteColor),
-                              ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 32.w, vertical: 40.h),
+                    child: SingleChildScrollView(
+                      child: ChangeNotifierProvider(
+                        create: (context) => viewModel,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.signup,
+                              style: AppStyles.textButton.copyWith(
+                                  color: AppColor.primaryColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 22),
                             ),
-                          ),
-                          SizedBox(height: 20.h),
-                          Align(
-                            alignment: Alignment.center,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    AppRoutesName.login, (route) => false);
+                            SizedBox(height: 20.h),
+                            Text(
+                              AppStrings.fullName,
+                              style:
+                                  AppStyles.generalText.copyWith(fontSize: 16.sp),
+                            ),
+                            SizedBox(height: 6.h),
+                            customTextFormField(
+                              fillColor: AppColor.primaryColor.withOpacity(.1),
+                              controller: nameController,
+                              borderColor: AppColor.primaryColor.withOpacity(.05),
+                              hintText: AppStrings.fullNameHint,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 18.w, vertical: 10.h),
+                              textStyle:
+                                  AppStyles.generalText.copyWith(fontSize: 16.sp),
+                              radius: 10.r,
+                              onValidate: (value) {
+                                if (value!.trim().isEmpty) {
+                                  return AppStrings.nameValidate;
+                                }
+                                return null;
                               },
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: AppStrings.haveAccount,
-                                      style: AppStyles.generalText
-                                          .copyWith(fontSize: 16.sp),
-                                    ),
-                                    TextSpan(
-                                      text: AppStrings.login,
-                                      style: AppStyles.bodyM.copyWith(
-                                          color: AppColor.primaryColor,
-                                          fontSize: 16.sp),
-                                    ),
-                                  ],
+                            ),
+                            SizedBox(height: 20.h),
+                            Text(
+                              AppStrings.email,
+                              style:
+                                  AppStyles.generalText.copyWith(fontSize: 16.sp),
+                            ),
+                            SizedBox(height: 6.h),
+                            customTextFormField(
+                                fillColor: AppColor.primaryColor.withOpacity(.1),
+                                controller: emailController,
+                                borderColor:
+                                    AppColor.primaryColor.withOpacity(.05),
+                                hintText: AppStrings.emailHint,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 18.w, vertical: 10.h),
+                                textStyle: AppStyles.generalText
+                                    .copyWith(fontSize: 16.sp),
+                                radius: 10.r,
+                                onValidate: (value) {
+                                  if (value!.trim().isEmpty) {
+                                    return AppStrings.emailValidate;
+                                  }
+                                  bool emailValid =
+                                      RegExp(Constants.emailReg).hasMatch(value);
+                                  if (!emailValid) {
+                                    return AppStrings.emailValidate2;
+                                  }
+                                  return null;
+                                }),
+                            SizedBox(height: 20.h),
+                            Text(
+                              AppStrings.mobile,
+                              style:
+                                  AppStyles.generalText.copyWith(fontSize: 16.sp),
+                            ),
+                            SizedBox(height: 6.h),
+                            customTextFormField(
+                                fillColor: AppColor.primaryColor.withOpacity(.1),
+                                controller: phoneController,
+                                keyboardType: TextInputType.phone,
+                                borderColor:
+                                    AppColor.primaryColor.withOpacity(.05),
+                                hintText: AppStrings.mobileHint,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 18.w, vertical: 10.h),
+                                textStyle: AppStyles.generalText
+                                    .copyWith(fontSize: 16.sp),
+                                radius: 10.r,
+                                onValidate: (value) {
+                                  if (value!.trim().isEmpty) {
+                                    return AppStrings.phoneValidate;
+                                  }
+                                  RegExp regex = RegExp(Constants.phoneReg);
+                                  if (!regex.hasMatch(value)) {
+                                    return AppStrings.phoneValidate2;
+                                  }
+                                  return null;
+                                }),
+                            SizedBox(height: 20.h),
+                            Text(
+                              AppStrings.password,
+                              style:
+                                  AppStyles.generalText.copyWith(fontSize: 16.sp),
+                            ),
+                            SizedBox(height: 6.h),
+                            customTextFormField(
+                              fillColor: AppColor.primaryColor.withOpacity(.1),
+                              controller: passwordController,
+                              borderColor: AppColor.primaryColor.withOpacity(.05),
+                              isPassword: true,
+                              hintText: AppStrings.passwordHint,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 18.w, vertical: 10.h),
+                              textStyle:
+                                  AppStyles.generalText.copyWith(fontSize: 16.sp),
+                              radius: 10.r,
+                              onValidate: (value) {
+                                if (value!.trim().isEmpty) {
+                                  return AppStrings.passwordValidate;
+                                }
+                                RegExp regex = RegExp(Constants.passwordReg);
+                                if (!regex.hasMatch(value)) {
+                                  return AppStrings.passwordValidate2;
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: 50.h),
+                            InkWell(
+                              onTap: () async {
+                                if (formKey.currentState!.validate()) {
+                                  viewModel.createAccount(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      phone: phoneController.text,
+                                      password: passwordController.text);
+                                }
+                              },
+                              child: customButton(
+                                color: AppColor.primaryColor,
+                                borderColor: AppColor.primaryColor,
+                                height: 60.h,
+                                width: 360.w,
+                                borderRadius: BorderRadius.circular(15.r),
+                                child: Text(
+                                  AppStrings.create,
+                                  style: AppStyles.textButton
+                                      .copyWith(color: AppColor.whiteColor),
                                 ),
                               ),
                             ),
-                          )
-                        ],
+                            SizedBox(height: 20.h),
+                            Align(
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      AppRoutesName.login, (route) => false);
+                                },
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: AppStrings.haveAccount,
+                                        style: AppStyles.generalText
+                                            .copyWith(fontSize: 16.sp),
+                                      ),
+                                      TextSpan(
+                                        text: AppStrings.login,
+                                        style: AppStyles.bodyM.copyWith(
+                                            color: AppColor.primaryColor,
+                                            fontSize: 16.sp),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -251,8 +259,9 @@ class _SignUpScreenState extends BaseView<SignUpScreen, SignUpViewModel>
   }
 
   @override
-  goToHome() {
-    Navigator.pushNamed(context, AppRoutesName.home);
-
+  goToHome(UserModel userModel) {
+    var provider = Provider.of<UserProvider>(context,listen: false);
+    provider.userModel=userModel;
+    Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.home,(route) => false,);
   }
 }

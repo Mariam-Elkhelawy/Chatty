@@ -1,5 +1,5 @@
 class AppImages {
-  static const String splash = 'assets/images/Splash.jpg';
+  static const String splash = 'assets/images/splash.png';
   static const String auth = 'assets/images/auth.png';
   static const String authVector = 'assets/images/auth_vector.png';
   static const String icFriends = 'assets/icons/ic_friends.png';
@@ -10,4 +10,5 @@ class AppImages {
   static const String icWork = 'assets/icons/ic_work.png';
   static const String icMusic = 'assets/icons/ic_music.png';
   static const String icLove = 'assets/icons/ic_love.png';
+  static const String settings = 'assets/images/settings.png';
 }

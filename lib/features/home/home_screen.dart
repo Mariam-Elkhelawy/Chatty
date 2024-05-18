@@ -1,9 +1,11 @@
 import 'package:chatty/config/routes/app_routes_names.dart';
+import 'package:chatty/core/database/database_utils.dart';
 import 'package:chatty/core/utils/app_colors.dart';
 import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
 import 'package:chatty/features/home/home_navigator.dart';
 import 'package:chatty/features/home/home_vm.dart';
+import 'package:chatty/features/home/widgets/room_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,7 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
     super.initState();
     viewModel.navigator = this;
     viewModel.getRooms();
+    setState(() {});
   }
 
   @override
@@ -32,6 +35,40 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
         child: Scaffold(
           backgroundColor: AppColor.whiteColor,
           appBar: AppBar(
+            iconTheme: const IconThemeData(color: AppColor.whiteColor),
+            actions: [
+              PopupMenuButton<String>(
+                offset: const Offset(0, 40),
+                color: AppColor.whiteColor,
+                surfaceTintColor: AppColor.whiteColor,
+                onSelected: (value) async {
+                  switch (value) {
+                    case 'Logout':
+                      await DataBaseUtils.signOut()
+                          .then((value) => Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                AppRoutesName.auth,
+                                (route) => false,
+                              ));
+                      break;
+                    case 'Settings':
+                      Navigator.pushNamed(context, AppRoutesName.settings);
+                      break;
+                  }
+                },
+                itemBuilder: (BuildContext context) {
+                  return {'Logout', 'Settings'}.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(
+                        choice,
+                        style: AppStyles.bodyM.copyWith(color: AppColor.second),
+                      ),
+                    );
+                  }).toList();
+                },
+              ),
+            ],
             backgroundColor: AppColor.primaryColor,
             title: Text(
               'My Rooms',
@@ -51,45 +88,16 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
           ),
           body: Consumer<HomeViewModel>(
             builder: (context, homeVM, child) {
-              return
-
-
-                Padding(
+              return Padding(
                 padding: EdgeInsets.all(16.r),
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 140 / 200,
+                      // mainAxisSpacing: 16,
+                      childAspectRatio: 135 / 200,
                       crossAxisSpacing: 16),
                   itemBuilder: (context, index) {
-                    return Material(
-                      color: AppColor.whiteColor,
-                      borderRadius: BorderRadius.circular(20.r),
-                      elevation: 10,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 90,
-                              backgroundImage: AssetImage(
-                                'assets/images/${homeVM.rooms[index].catId}.jpg',
-                              ),
-                            ),
-                            Text(homeVM.rooms[index].roomName,
-                                style: AppStyles.bodyS
-                                    .copyWith(color: AppColor.primaryColor)),
-                            Text(
-                              homeVM.rooms[index].roomDescription,
-                              maxLines: 2,
-                              style: AppStyles.bodyS.copyWith(fontSize: 14,
-                                  color: AppColor.primaryColor.withOpacity(.5)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                    return RoomWidget(roomModel: homeVM.rooms[index]);
                   },
                   itemCount: homeVM.rooms.length,
                 ),

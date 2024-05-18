@@ -28,7 +28,7 @@ class AuthScreen extends StatelessWidget {
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(AppImages.authVector),
-              SizedBox(height: 50.h),
+              SizedBox(height: 65.h),
               Align(
                 alignment: Alignment.topLeft,
                 child: SizedBox(
@@ -47,7 +47,7 @@ class AuthScreen extends StatelessWidget {
                   style: AppStyles.bodyS
                 ),
               ),
-              SizedBox(height: 75.h),
+              SizedBox(height: 85.h),
               InkWell(
                 onTap: () {
                   Navigator.pushNamedAndRemoveUntil(

@@ -1,7 +1,7 @@
 import 'package:chatty/core/database/database_utils.dart';
 import 'package:chatty/features/base.dart';
+import 'package:chatty/features/models/room_model.dart';
 import 'package:chatty/features/room/add_room_navigator.dart';
-import 'package:chatty/models/room_model.dart';
 
 class AddRoomViewModel extends BaseViewModel<AddRoomNavigator> {
   String? message;

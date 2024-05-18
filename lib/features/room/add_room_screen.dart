@@ -4,10 +4,10 @@ import 'package:chatty/core/utils/app_colors.dart';
 import 'package:chatty/core/utils/app_strings.dart';
 import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
+import 'package:chatty/features/models/room_category_model.dart';
 import 'package:chatty/features/room/add_room_navigator.dart';
 import 'package:chatty/features/room/add_room_vm.dart';
 import 'package:chatty/features/room/widgets/custom_drop_down.dart';
-import 'package:chatty/models/room_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -86,6 +86,7 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
                           ),
                           SizedBox(height: 6.h),
                           customTextFormField(
+                            fillColor: AppColor.primaryColor.withOpacity(.1),
                             controller: nameController,
                             borderColor: AppColor.primaryColor.withOpacity(.05),
                             hintText: AppStrings.roomNameHint,
@@ -124,6 +125,7 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
                           ),
                           SizedBox(height: 6.h),
                           customTextFormField(
+                            fillColor: AppColor.primaryColor.withOpacity(.1),
                             controller: descriptionController,
                             borderColor: AppColor.primaryColor.withOpacity(.05),
                             hintText: AppStrings.descriptionHint,

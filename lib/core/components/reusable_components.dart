@@ -22,22 +22,25 @@ Widget customTextFormField(
     TextStyle? textStyle,
     TextInputType? keyboardType,
     EdgeInsetsGeometry? contentPadding,
+    Color? cursorColor = AppColor.primaryColor,
+    required Color fillColor,
     String? Function(String?)? onValidate}) {
   return TextFormField(
     keyboardType: keyboardType,
     validator: onValidate,
     style: textStyle,
     obscureText: isPassword,
-    cursorColor: AppColor.primaryColor,
+    cursorColor: cursorColor,
     controller: controller,
     decoration: InputDecoration(
       contentPadding: contentPadding,
       hintText: hintText,
       hintStyle: hintStyle,
       filled: true,
-      fillColor: AppColor.primaryColor.withOpacity(.1),
+      fillColor: fillColor,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
+      errorMaxLines: 8,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(radius),
         borderSide: BorderSide(color: borderColor),
@@ -89,6 +92,6 @@ customToast({required String message}) {
       gravity: ToastGravity.BOTTOM,
       backgroundColor: AppColor.primaryColor,
       timeInSecForIosWeb: 3,
-      textColor: Colors.white,
+      textColor: AppColor.whiteColor,
       fontSize: 13.0);
 }

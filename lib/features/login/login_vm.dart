@@ -1,7 +1,7 @@
 import 'package:chatty/core/database/database_utils.dart';
 import 'package:chatty/features/base.dart';
 import 'package:chatty/features/login/login_navigator.dart';
-import 'package:chatty/models/user_model.dart';
+import 'package:chatty/features/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginViewModel extends BaseViewModel<LoginNavigator> {

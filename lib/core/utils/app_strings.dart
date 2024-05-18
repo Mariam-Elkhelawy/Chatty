@@ -43,4 +43,12 @@ class AppStrings {
   static const String phoneValidate2 = "Enter Valid Number e.g: +02010XXXXXXXX";
   static const String chattyIntro =
       'Our chatty app is the perfect way to stay connected with friends and family.';
+  static const String editPassword ='Change Password';
+  static const String editName ='Change User Name';
+  static const String editEmail ='Change Email';
+  static const String privacy ='Privacy and policy';
+  static const String aboutUs ='Abouts Us';
+  static const String cancel ='Cancel';
+  static const String deleteAccount ='Delete Account';
+  static const String deleteAccountSure ='Are You Sure To Delete Account !?';
 }
