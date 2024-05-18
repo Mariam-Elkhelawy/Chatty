@@ -21,10 +21,15 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  firebase_app_check: ^0.2.1+17
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+flutter_launcher_icons:
+  image_path: "assets/icons/icon.png"
+  android: "launcher_icon"
 
   flutter_lints: ^4.0.0
 

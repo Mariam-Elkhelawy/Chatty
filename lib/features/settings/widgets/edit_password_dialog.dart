@@ -28,6 +28,7 @@ class _EditPasswordDialogState extends State<EditPasswordDialog> {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: AlertDialog(
+        backgroundColor: AppColor.whiteColor,
         contentPadding: EdgeInsets.zero,
         actions: [
           ElevatedButton(

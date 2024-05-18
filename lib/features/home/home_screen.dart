@@ -1,6 +1,7 @@
 import 'package:chatty/config/routes/app_routes_names.dart';
 import 'package:chatty/core/database/database_utils.dart';
 import 'package:chatty/core/utils/app_colors.dart';
+import 'package:chatty/core/utils/app_images.dart';
 import 'package:chatty/core/utils/styles.dart';
 import 'package:chatty/features/base.dart';
 import 'package:chatty/features/home/home_navigator.dart';
@@ -88,6 +89,22 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
           ),
           body: Consumer<HomeViewModel>(
             builder: (context, homeVM, child) {
+              if (homeVM.rooms.isEmpty) {
+                return Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                     SizedBox(height: 130.h),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(AppImages.noRoom,width: 350,height: 350,fit: BoxFit.cover,)),
+                    Text(
+                      'No Rooms Added',
+                      style: AppStyles.bodyM
+                          .copyWith(color: AppColor.primaryColor),
+                    ),
+                  ],
+                );
+              }
               return Padding(
                 padding: EdgeInsets.all(16.r),
                 child: GridView.builder(

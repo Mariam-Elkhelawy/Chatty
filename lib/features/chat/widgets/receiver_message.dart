@@ -34,7 +34,7 @@ class ReceiverMessage extends StatelessWidget {
             children: [
               Text(
                 messageModel.senderName,
-                style: AppStyles.bodyS.copyWith(color: AppColor.primaryColor),
+                style: AppStyles.bodyS,
               ),
               Text(
                 messageModel.content,

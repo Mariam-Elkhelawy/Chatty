@@ -12,82 +12,74 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              AppImages.auth,
-            ),
-            fit: BoxFit.fill),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: EdgeInsets.all(16.r),
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(AppImages.authVector),
-              SizedBox(height: 65.h),
-              Align(
-                alignment: Alignment.topLeft,
-                child: SizedBox(
-                  width: 170.w,
-                  child: Text(
-                    AppStrings.connect,
-                    style: AppStyles.textButton,
+    return Scaffold(
+      backgroundColor: AppColor.whiteColor,
+      body: Column(
+        children: [
+          SizedBox(height: 20.h),
+          Image.asset(AppImages.authVector),
+          Expanded(
+            child: Container(
+                decoration: BoxDecoration(
+                  color: AppColor.primaryColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(60.r),
+                    topRight: Radius.circular(60.r),
                   ),
                 ),
-              ),
-              SizedBox(height: 25.h),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  AppStrings.chattyIntro,
-                  style: AppStyles.bodyS
-                ),
-              ),
-              SizedBox(height: 85.h),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutesName.login, (route) => false);
-                },
-                child: customButton(
-                  borderColor: AppColor.whiteColor,
-                  height: 60.h,
-                  width: 360.w,
-                  borderRadius: BorderRadius.circular(15.r),
-                  color: AppColor.whiteColor,
-                  child: Text(
-                    AppStrings.login,
-                    style: AppStyles.textButton
-                        .copyWith(color: AppColor.primaryColor),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutesName.signup, (route) => false);
-                },
-                child: customButton(
-                  borderColor: AppColor.whiteColor,
-                  height: 60.h,
-                  width: 360.w,
-                  borderRadius: BorderRadius.circular(15.r),
-                  child: Text(
-                    AppStrings.signup,
-                    style: AppStyles.textButton,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+                child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.center,
+
+                children: [
+                    SizedBox(height: 45.h),
+                    Text(
+                      AppStrings.connect,
+                      style: AppStyles.textButton,
+                    ),
+                    SizedBox(height: 25.h),
+                    Text(AppStrings.chattyIntro, style: AppStyles.bodyS,textAlign: TextAlign.center,),
+                    SizedBox(height: 90.h),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, AppRoutesName.login, (route) => false);
+                      },
+                      child: customButton(
+                        borderColor: AppColor.whiteColor,
+                        height: 60.h,
+                        width: 360.w,
+                        borderRadius: BorderRadius.circular(15.r),
+                        color: AppColor.whiteColor,
+                        child: Text(
+                          AppStrings.login,
+                          style: AppStyles.textButton
+                              .copyWith(color: AppColor.primaryColor),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, AppRoutesName.signup, (route) => false);
+                      },
+                      child: customButton(
+                        borderColor: AppColor.whiteColor,
+                        height: 60.h,
+                        width: 360.w,
+                        borderRadius: BorderRadius.circular(15.r),
+                        child: Text(
+                          AppStrings.signup,
+                          style: AppStyles.textButton,
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          )
+        ],
       ),
     );
   }

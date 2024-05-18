@@ -32,7 +32,7 @@ class SenderMessage extends StatelessWidget {
             children: [
               Text(
                 messageModel.senderName,
-                style: AppStyles.bodyS.copyWith(color: AppColor.second),
+                style: AppStyles.bodyS,
               ),
               Text(
                 messageModel.content,

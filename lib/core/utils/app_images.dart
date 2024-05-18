@@ -11,4 +11,5 @@ class AppImages {
   static const String icMusic = 'assets/icons/ic_music.png';
   static const String icLove = 'assets/icons/ic_love.png';
   static const String settings = 'assets/images/settings.png';
+  static const String noRoom = 'assets/images/no_rooms.png';
 }
