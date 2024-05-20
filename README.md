@@ -29,7 +29,7 @@ To get started with the Chatty app, follow these simple steps:
 4. Run the app:
    flutter run
 
-That's it! You're now ready to explore the Iqraa app on your device or emulator.
+That's it! You're now ready to explore the Chatty app on your device or emulator.
 
 ## Contribution
 Contributions are welcome! If you have any suggestions, bug fixes, or new features to propose, feel free to do so.
